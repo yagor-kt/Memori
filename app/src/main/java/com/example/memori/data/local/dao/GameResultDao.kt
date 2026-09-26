@@ -44,6 +44,9 @@ interface GameResultDao {
     )
     suspend fun getLeaderboard(difficulty: String): List<LeaderboardEntry>
 
+    @Query("Select count(*) FROM game_results where playerId = :playerId and won = :isWon")
+    suspend fun countWinsForPlayer(playerId: Long, isWon: Boolean = true): Int
+
     @Query("DELETE FROM game_results WHERE playerId = :playerId")
     suspend fun deleteForPlayer(playerId: Long): Int
 }

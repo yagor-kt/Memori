@@ -19,6 +19,10 @@ class GameRepository(
         return gameResultDao.getLeaderboard(difficulty)
     }
 
+    suspend fun countWinsForPlayer(playerId: Long): Int {
+        return gameResultDao.countWinsForPlayer(playerId)
+    }
+
     suspend fun deleteResultsForPlayer(playerId: Long) {
         gameResultDao.deleteForPlayer(playerId)
     }

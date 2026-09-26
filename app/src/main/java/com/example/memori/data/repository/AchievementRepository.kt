@@ -1,11 +1,10 @@
-package com.example.memori.data.repository.data.repository
+package com.example.memori.data.repository
 
 import androidx.room.withTransaction
 import com.example.memori.data.local.AppDatabase
 import com.example.memori.data.local.dao.UnlockedAchievement
 import com.example.memori.data.local.entity.Achievement
 import com.example.memori.data.local.entity.PlayerAchievement
-import com.example.memori.data.repository.AchievementDefinitions
 
 class AchievementRepository(
     private val database: AppDatabase
