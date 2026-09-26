@@ -160,14 +160,6 @@ class MainViewModel(
         }
     }
 
-    fun onSettingsSelected() {
-        viewModelScope.launch {
-            eventChannel.send(
-                MainEvent.ShowMessage("Настройки будут добавлены в следующей итерации")
-            )
-        }
-    }
-
     class Factory(
         private val application: App
     ) : ViewModelProvider.Factory {

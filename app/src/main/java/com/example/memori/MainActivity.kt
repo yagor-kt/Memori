@@ -17,6 +17,8 @@ import com.example.memori.ui.login.LoginScreen
 import com.example.memori.ui.login.LoginViewModel
 import com.example.memori.ui.main.MainScreen
 import com.example.memori.ui.main.MainViewModel
+import com.example.memori.ui.settings.SettingsScreen
+import com.example.memori.ui.settings.SettingsViewModel
 import com.example.memori.ui.theme.MemoriTheme
 
 @Serializable
@@ -27,6 +29,9 @@ data object MainRoute
 
 @Serializable
 data class GameRoute(val difficulty: String)
+
+@Serializable
+data object SettingsRoute
 
 class MainActivity : ComponentActivity() {
 
@@ -85,6 +90,9 @@ private fun MemoriNavHost(
                 },
                 onGameSelected = { difficulty ->
                     navController.navigate(GameRoute(difficulty))
+                },
+                onSettingsSelected = {
+                    navController.navigate(SettingsRoute)
                 }
             )
         }
@@ -106,6 +114,23 @@ private fun MemoriNavHost(
                         route = MainRoute,
                         inclusive = false
                     )
+                }
+            )
+        }
+
+        composable<SettingsRoute> {
+            val settingsViewModel: SettingsViewModel = viewModel(
+                factory = SettingsViewModel.Factory(application)
+            )
+
+            SettingsScreen(
+                viewModel = settingsViewModel,
+                onBack = { navController.popBackStack() },
+                onChangePlayer = {
+                    navController.navigate(LoginRoute) {
+                        popUpTo<LoginRoute> { inclusive = true }
+                        launchSingleTop = true
+                    }
                 }
             )
         }

@@ -39,7 +39,8 @@ import com.example.memori.R
 fun MainScreen(
     viewModel: MainViewModel,
     onChangePlayer: () -> Unit,
-    onGameSelected: (String) -> Unit
+    onGameSelected: (String) -> Unit,
+    onSettingsSelected: () -> Unit
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val snackbarHostState = remember { SnackbarHostState() }
@@ -126,7 +127,7 @@ fun MainScreen(
                             )
                         }
 
-                        IconButton(onClick = viewModel::onSettingsSelected) {
+                        IconButton(onClick = onSettingsSelected) {
                             Icon(
                                 imageVector = Icons.Default.Settings,
                                 contentDescription = stringResource(R.string.settings)
