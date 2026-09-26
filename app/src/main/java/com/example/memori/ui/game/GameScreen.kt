@@ -39,6 +39,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
@@ -375,15 +376,23 @@ private fun MemoryCardView(
             contentAlignment = Alignment.Center
         ) {
             if (rotation > 90f) {
-                AsyncImage(
-                    model = "file:///android_asset/cards/${card.name}.png",
-                    contentDescription = card.name,
-                    contentScale = ContentScale.Crop,
+                Box(
                     modifier = Modifier
                         .fillMaxSize()
-                        .graphicsLayer { rotationY = 180f }
-                        .clip(RoundedCornerShape(10.dp))
-                )
+                        .background(Color.White),   // белый фон карточки
+                    contentAlignment = Alignment.Center
+                ) {
+                    AsyncImage(
+                        model = "file:///android_asset/cards/${card.name}.jpg",
+                        contentDescription = card.name,
+                        contentScale = ContentScale.Fit,
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(5.dp)
+                            .graphicsLayer { rotationY = 180f }
+                            .clip(RoundedCornerShape(10.dp))
+                    )
+                }
             } else {
                 CardBack()
             }

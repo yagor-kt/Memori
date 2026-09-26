@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.example.memori.App
 import com.example.memori.data.local.entity.GameResult
+import com.example.memori.data.repository.AchievementChecker
 import com.example.memori.domain.model.Card
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -347,7 +348,7 @@ class GameViewModel(
             _uiState.update {
                 it.copy(
                     status = GameStatus.ERROR,
-                    isLoading = false,
+                    isLoading = true,
                     errorMessage = "Недостаточно изображений для выбранной сложности"
                 )
             }
@@ -378,7 +379,7 @@ class GameViewModel(
                 elapsedSeconds = 0,
                 status = GameStatus.READY,
                 isLocked = false,
-                isLoading = true,
+                isLoading = false,
                 errorMessage = null,
                 resultSaved = false
             )
@@ -508,7 +509,7 @@ class GameViewModel(
                 }
             }
 
-            runCatching {
+            val resultId = runCatching {
                 application.gameRepository.saveResult(
                     GameResult(
                         playerId = currentPlayerId,
@@ -518,8 +519,23 @@ class GameViewModel(
                         won = won
                     )
                 )
-            }.onFailure {
+            }.getOrElse {
                 saveError = "Не удалось сохранить результат игры"
+                null
+            }
+
+            if (resultId != null && won) {
+                runCatching {
+                    AchievementChecker(application).checkAfterGame(
+                        playerId = currentPlayerId,
+                        difficulty = current.difficulty,
+                        won = true,
+                        timeSpent = current.elapsedSeconds,
+                        moves = current.moves
+                    )
+                }.onFailure {
+                    saveError = "Не удалось проверить достижения"
+                }
             }
 
             _uiState.update {
