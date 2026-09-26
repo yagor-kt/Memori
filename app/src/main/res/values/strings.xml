@@ -1,13 +1,57 @@
 <resources>
     <string name="app_name">Мемори</string>
+
+    <!-- Вход -->
     <string name="login_prompt">Введите имя, чтобы начать играть</string>
     <string name="name_label">Имя игрока</string>
     <string name="name_hint">Не более 20 символов</string>
     <string name="login_button">Войти</string>
+
+    <!-- Главное меню -->
     <string name="greeting">Привет, %1$s</string>
     <string name="coins_balance">Монеты: %1$d</string>
     <string name="choose_difficulty">Выберите сложность</string>
     <string name="settings">Настройки</string>
-    <string name="change_player">Сменить игрока</string>
     <string name="profile_load_error">Не удалось загрузить профиль</string>
+
+    <!-- Игра -->
+    <string name="game_pause">Пауза</string>
+    <string name="game_continue">Продолжить</string>
+    <string name="game_exit_to_menu">Выйти в меню</string>
+    <string name="game_moves">Ходы: %1$d</string>
+    <string name="game_pairs">Пары: %1$d/%2$d</string>
+    <string name="game_win_title">Победа!</string>
+    <string name="game_win_text">Вы нашли все пары.</string>
+    <string name="game_win_reward">+%1$d монет</string>
+    <string name="game_time_up_title">Время вышло</string>
+    <string name="game_try_again">Попробуйте сыграть ещё раз.</string>
+    <string name="game_play_again">Ещё раз</string>
+    <string name="game_show_pair">Показать пару</string>
+    <string name="game_show_pair_cost">50 монет</string>
+    <string name="game_add_time">+15 секунд</string>
+    <string name="game_add_time_cost">40 монет</string>
+
+    <!-- Настройки -->
+    <string name="settings_title">Настройки</string>
+    <string name="settings_profile">Профиль</string>
+    <string name="settings_achievements">Достижения</string>
+    <string name="settings_leaderboard">Лидерборд</string>
+    <string name="profile_section">Профиль игрока</string>
+    <string name="profile_name">Имя: %1$s</string>
+    <string name="change_player">Сменить игрока</string>
+    <string name="reset_progress_button">Сбросить мой прогресс</string>
+    <string name="reset_progress_title">Сбросить прогресс?</string>
+    <string name="reset_progress_confirmation">Будут удалены результаты игр и достижения, а баланс монет и ежедневный бонус сброшены. Это действие нельзя отменить.</string>
+    <string name="reset_button">Сбросить</string>
+    <string name="cancel_button">Отмена</string>
+    <string name="back_button">Назад</string>
+    <string name="no_achievements">Достижения пока не добавлены</string>
+    <string name="achievement_unlocked">Получено</string>
+    <string name="achievement_locked">Не получено</string>
+    <string name="achievement_reward">Награда: %1$d монет</string>
+    <string name="achievement_date">Получено: %1$s</string>
+    <string name="leaderboard_empty">Пока нет победителей на этой сложности</string>
+    <string name="leaderboard_place">%1$d место</string>
+    <string name="leaderboard_time">Время: %1$s</string>
+    <string name="leaderboard_moves">Ходы: %1$d</string>
 </resources>
