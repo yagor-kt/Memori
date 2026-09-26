@@ -1,6 +1,10 @@
 package com.example.memori
 
 import android.app.Application
+import com.example.memori.data.local.AppDatabase
+import com.example.memori.data.repository.GameRepository
+import com.example.memori.data.repository.PlayerRepository
+import com.example.memori.data.repository.data.repository.AchievementRepository
 import java.util.Collections
 
 class App : Application() {
@@ -9,7 +13,7 @@ class App : Application() {
         listOf("bear", "cat", "dog", "fox", "frog", "giraffe", "hedgehog", "lion", "monkey", "owl", "panda", "penguin", "rabbit", "raccoon", "sheep", "tiger", "turtle", "zebra", "elephant", "koala", "parrot", "squirrel", "whale", "wolf")
     )
 
-    /*val database: AppDatabase by lazy(LazyThreadSafetyMode.SYNCHRONIZED) {
+    val database: AppDatabase by lazy(LazyThreadSafetyMode.SYNCHRONIZED) {
         AppDatabase.getInstance(applicationContext)
     }
 
@@ -32,5 +36,5 @@ class App : Application() {
     companion object {
         const val PREFERENCES_NAME = "memori_preferences"
         const val CURRENT_PLAYER_ID_KEY = "current_player_id"
-    }*/
+    }
 }
