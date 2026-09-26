@@ -38,7 +38,8 @@ import com.example.memori.R
 @Composable
 fun MainScreen(
     viewModel: MainViewModel,
-    onChangePlayer: () -> Unit
+    onChangePlayer: () -> Unit,
+    onGameSelected: (String) -> Unit
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val snackbarHostState = remember { SnackbarHostState() }
@@ -150,7 +151,7 @@ fun MainScreen(
                             DifficultyCard(
                                 difficulty = difficulty,
                                 onClick = {
-                                    viewModel.onDifficultySelected(difficulty)
+                                    onGameSelected(difficulty.id)
                                 }
                             )
                         }

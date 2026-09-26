@@ -9,6 +9,9 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.toRoute
+import com.example.memori.ui.game.GameScreen
+import com.example.memori.ui.game.GameViewModel
 import kotlinx.serialization.Serializable
 import com.example.memori.ui.login.LoginScreen
 import com.example.memori.ui.login.LoginViewModel
@@ -21,6 +24,9 @@ data object LoginRoute
 
 @Serializable
 data object MainRoute
+
+@Serializable
+data class GameRoute(val difficulty: String)
 
 class MainActivity : ComponentActivity() {
 
@@ -53,9 +59,7 @@ private fun MemoriNavHost(
                 viewModel = loginViewModel,
                 onLoginSuccess = {
                     navController.navigate(MainRoute) {
-                        popUpTo<LoginRoute> {
-                            inclusive = true
-                        }
+                        popUpTo<LoginRoute> { inclusive = true }
                         launchSingleTop = true
                     }
                 }
@@ -75,11 +79,33 @@ private fun MemoriNavHost(
                         .apply()
 
                     navController.navigate(LoginRoute) {
-                        popUpTo<MainRoute> {
-                            inclusive = true
-                        }
+                        popUpTo<MainRoute> { inclusive = true }
                         launchSingleTop = true
                     }
+                },
+                onGameSelected = { difficulty ->
+                    navController.navigate(GameRoute(difficulty))
+                }
+            )
+        }
+
+        composable<GameRoute> { backStackEntry ->
+            val route = backStackEntry.toRoute<GameRoute>()
+
+            val gameViewModel: GameViewModel = viewModel(
+                factory = GameViewModel.Factory(
+                    application = application,
+                    difficulty = route.difficulty
+                )
+            )
+
+            GameScreen(
+                viewModel = gameViewModel,
+                onExitToMenu = {
+                    navController.popBackStack(
+                        route = MainRoute,
+                        inclusive = false
+                    )
                 }
             )
         }

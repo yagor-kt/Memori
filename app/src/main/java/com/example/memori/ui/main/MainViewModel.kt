@@ -160,14 +160,6 @@ class MainViewModel(
         }
     }
 
-    fun onDifficultySelected(difficulty: DifficultyOption) {
-        viewModelScope.launch {
-            eventChannel.send(
-                MainEvent.ShowMessage("Уровень «${difficulty.title}» будет доступен в следующей итерации")
-            )
-        }
-    }
-
     fun onSettingsSelected() {
         viewModelScope.launch {
             eventChannel.send(
